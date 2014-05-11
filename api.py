@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import request, url_for
+from flask import request, url_for,jsonify
 from flask.ext.api import FlaskAPI, status, exceptions
 import string
 from time import time,sleep
@@ -33,8 +33,7 @@ def create_server():
     "password" : passwd, \
     "id" : server_id \
     }
-
-    return server_params
+    return jsonify(**server_params)
 
 @app.route('/server/destroy', methods = ['POST'])
 def destroy_server():
@@ -48,7 +47,7 @@ def destroy_server():
 
     status = lxc_destroy(hostname)
 
-    return {"status" : status}
+    return jsonify({"status" : status})
 
 def lxc_destroy(hostname):
     
