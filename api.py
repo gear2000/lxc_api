@@ -3,7 +3,7 @@
 from flask import request, url_for
 from flask.ext.api import FlaskAPI, status, exceptions
 import string
-from time import time
+from time import time,sleep
 from itertools import chain
 from random import seed, choice, sample, randrange
 import json
@@ -52,7 +52,7 @@ def lxc_destroy(hostname):
     cmd = "lxc stop %s" % (hostname)
     _execute(cmd)
 
-    time.sleep(10)
+    sleep(10)
 
     cmd = "lxc destroy %s" % (hostname)
     status = _execute(cmd)
