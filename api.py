@@ -51,13 +51,13 @@ def lxc_create(hostname,image,size,passwd=None):
     cmd = "openssl passwd -1 %s" % passwd
     passwd_hash = _execute(cmd)
     
+    cmd = "lxc-clone -o %s -n %s" % (image,hostname)
+    _execute(cmd)
+
     cmd = "ssh-keygen -f /var/lib/lxc/%s/rootfs/etc/ssh/ssh_host_rsa_key -N \'\' -t rsa" % hostname
     _execute(cmd)
 
     cmd = "ssh-keygen -f /var/lib/lxc/%s/rootfs/etc/ssh/ssh_host_dsa_key -N \'\' -t dsa" % hostname
-    _execute(cmd)
-
-    cmd = "lxc-clone -o %s -n %s" % (image,hostname)
     _execute(cmd)
 
     memory = _size(size)
