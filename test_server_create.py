@@ -11,7 +11,7 @@ class Lxc(object):
         self.http = httplib2.Http()
         self.headers = {'Content-type': 'application/json'}
 
-    def create_server(self,hostname,size=1,image="precise"):
+    def create_server(self,hostname,size=1,image="jbase"):
 
         url = self.url + "/server/create"
     
