@@ -7,7 +7,7 @@ class Lxc(object):
 
     def __init__(self):
 
-        self.url = 'http://127.0.0.1:5000'
+        self.url = 'http://10.0.3.1:5000'
         self.http = httplib2.Http()
         self.headers = {'Content-type': 'application/json'}
 

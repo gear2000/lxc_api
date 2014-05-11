@@ -183,6 +183,6 @@ def _mkpasswd(length=8, digits=2, upper=2, lower=2):
     return "".join(sample(password, len(password)))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0')
 
 
