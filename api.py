@@ -54,7 +54,7 @@ def lxc_destroy(hostname):
     cmd = "lxc stop %s" % (hostname)
     _execute(cmd)
 
-    sleep(10)
+    sleep(5)
 
     cmd = "lxc destroy %s" % (hostname)
     status = _execute(cmd)
