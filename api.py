@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python
 
 from flask import request, url_for
 from flask.ext.api import FlaskAPI, status, exceptions
