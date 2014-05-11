@@ -23,13 +23,13 @@ def create_server():
     size = input["size"]
     image = input["image"]
 
-    public_ip,private_ip,passwd = lxc_create(hostname,image,size,passwd=None)
+    public_ips,private_ips,passwd = lxc_create(hostname,image,size,passwd=None)
 
     server_id = _mkpasswd(length=10, digits=7, upper=0, lower=2)
 
     server_params = { "hostname":hostname, \
-    "public_ip" : public_ip, \
-    "private_ip" : private_ip, \
+    "public_ips" : public_ips, \
+    "private_ips" : private_ips, \
     "password" : passwd, \
     "id" : server_id \
     }
@@ -84,7 +84,7 @@ def lxc_create(hostname,image,size,passwd=None):
     cmd = 'echo "lxc.cgroup.memory.limit_in_bytes = %s" >> /var/lib/lxc/%s/config' % (memory,hostname)
     _execute(cmd)
 
-    netfile,public_ip,private_ip = _create_net()
+    netfile,public_ips,private_ips = _create_net()
 
     netwrite = open("/var/lib/lxc/%s/rootfs/etc/network/interfaces" % hostname, "w")
     netwrite.write(netfile)
@@ -93,7 +93,7 @@ def lxc_create(hostname,image,size,passwd=None):
     cmd = "lxc start %s -d" % (hostname)
     _execute(cmd)
 
-    return public_ip,private_ip,passwd
+    return public_ips,private_ips,passwd
     
 def _create_net():
 
@@ -102,8 +102,8 @@ def _create_net():
 
     random_num = randrange(150, 199, 1)
 
-    public_ip = "{}.{}".format(public_base,random_num)
-    private_ip = "{}.{}".format(private_base,random_num)
+    public_ips = "{}.{}".format(public_base,random_num)
+    private_ips = "{}.{}".format(private_base,random_num)
 
     netfile = """
 # This file describes the network interfaces available on your system
@@ -132,7 +132,7 @@ iface eth1 inet static
     broadcast {prv_base}.255
 """.format(pub_base=public_base,prv_base=private_base,num=random_num)
 
-    return netfile,public_ip,private_ip
+    return netfile,public_ips,private_ips
 
 
 def _execute(cmd):
