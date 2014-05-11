@@ -25,10 +25,13 @@ def create_server():
 
     public_ip,private_ip,passwd = lxc_create(hostname,image,size,passwd=None)
 
+    server_id = _mkpasswd(length=10, digits=7, upper=0, lower=2):
+
     server_params = { "hostname":hostname, \
     "public_ip" : public_ip, \
     "private_ip" : private_ip, \
-    "password" : passwd \
+    "password" : passwd, \
+    "id" : server_id \
     }
 
     return json.dumps(server_params)
