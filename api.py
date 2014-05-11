@@ -34,7 +34,7 @@ def create_server():
     "id" : server_id \
     }
 
-    return json.dumps(server_params)
+    return server_params
 
 @app.route('/server/destroy', methods = ['POST'])
 def destroy_server():
@@ -48,7 +48,7 @@ def destroy_server():
 
     status = lxc_destroy(hostname)
 
-    return json.dumps({"status" : status})
+    return {"status" : status}
 
 def lxc_destroy(hostname):
     
