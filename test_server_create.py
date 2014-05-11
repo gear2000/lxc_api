@@ -23,6 +23,7 @@ class Lxc(object):
     
         if int(dict(response)["status"]) == 200:
             print "Post for server creation submitted for %s" % body
+            content = json.loads(content)
             return content
         else:
             print "Post for server creation failed for %s" % body
