@@ -43,6 +43,22 @@ def destroy_server():
     input = dict(request.json)
     hostname = input["hostname"]
 
+    status = lxc_destroy(hostname)
+
+    return json.dumps({"status" : status})
+
+def lxc_destroy(hostname):
+    
+    cmd = "lxc stop %s" % (hostname)
+    _execute(cmd)
+
+    time.sleep(10)
+
+    cmd = "lxc destroy %s" % (hostname)
+    status = _execute(cmd)
+
+    if status: return True
+
 def lxc_create(hostname,image,size,passwd=None):
 
     if not passwd:
