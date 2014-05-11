@@ -33,7 +33,8 @@ def create_server():
     "password" : passwd, \
     "id" : server_id \
     }
-    return jsonify(**server_params)
+
+    return jsonify(server_params)
 
 @app.route('/server/destroy', methods = ['POST'])
 def destroy_server():
@@ -47,7 +48,7 @@ def destroy_server():
 
     status = lxc_destroy(hostname)
 
-    return jsonify({"status" : status})
+    jsonify({"status" : status})
 
 def lxc_destroy(hostname):
     
