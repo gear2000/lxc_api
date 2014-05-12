@@ -34,7 +34,8 @@ def create_server():
     "id" : server_id \
     }
 
-    jsonify(server_params)
+    return jsonify(hostname=hostname)
+    #jsonify(server_params)
 
 @app.route('/server/destroy', methods = ['POST'])
 def destroy_server():
